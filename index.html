@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman game</title>
+</head>
+
+<body>
+
+    <script>
+        var randomWord = {
+            "scientists": ["Einstein", "Newton", "Curie", "Tesla", "Faraday"],
+            "pick": function () {
+                return this.scientists[Math.floor(Math.random() * this.scientists.length)]
+            }
+        }
+
+
+        var pick = randomWord.pick();
+        alert(pick);
+
+        var missMax = pick.length + 5;
+        var match = [];
+        var miss = 0;
+        var pickArray = pick.toLowerCase().split("");
+
+        console.log(pickArray);
+
+        document.onkeyup = function (event) {
+            var guess = event.key.toLowerCase();
+            if (pickArray.includes(guess)) {
+                match.push(pickArray.indexOf(guess));
+                delete pickArray[pickArray.indexOf(guess)];
+            } else {
+                miss++;
+                console.log("miss: " + guess);
+            };
+
+            if (match.length == pickArray.length) {
+                console.log("you win!");
+            } else if (miss == missMax) {
+                console.log("you lose!");
+            }
+            console.log("Misses: " + miss);
+            console.log(match);
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
