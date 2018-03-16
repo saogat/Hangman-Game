@@ -5,53 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Hangman game</title>
 </head>
 
 <body>
 
-    <script>
-        var randomWord = {
-            "scientists": ["Einstein", "Newton", "Curie", "Tesla", "Faraday"],
-            "pick": function () {
-                return this.scientists[Math.floor(Math.random() * this.scientists.length)]
-            }
-        }
+    </head>
+
+    <body>
+
+        <body>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="jumbotron">
+                            <h1>Hangman</h1>
+                            <p>Press any key to get started.</p>
+                            <p>Chose a category:</p>
+                            <!-- Single button -->
+                            <select id="mySelect" onchange="chooseCategory()">
+                                <option value="Full-Stack">Full-Stack terms
+                                    <option value="GA Cities">GA Cities
+                                        <option value="Atlanta Attractions">Atlanta Attractions
+                            </select>
+
+                            <h2>
+                                <span id="picked-word">
+                                    <strong></strong>
+                                </span>
+                            </h2>
+                            <h2>
+                                Missed:
+                                <span id="missed-count"> </span>
+                            </h2>
+                            <h2>
+                                Wrong:
+                                <span id="wrong-letters"> </span>
+                            </h2>
+                            <h2>
+                                Guesses remaining:
+                                <span id="remaining"> </span>
+                            </h2>
+                            <h2>
+                                Wins:
+                                <span id="wins"> </span>
+                            </h2>
+
+                            <h2>
+                                Losses:
+                                <span id="losses"> </span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-        var pick = randomWord.pick();
-        alert(pick);
-
-        var missMax = pick.length + 5;
-        var match = [];
-        var miss = 0;
-        var pickArray = pick.toLowerCase().split("");
-
-        console.log(pickArray);
-
-        document.onkeyup = function (event) {
-            var guess = event.key.toLowerCase();
-            if (pickArray.includes(guess)) {
-                match.push(pickArray.indexOf(guess));
-                delete pickArray[pickArray.indexOf(guess)];
-            } else {
-                miss++;
-                console.log("miss: " + guess);
-            };
-
-            if (match.length == pickArray.length) {
-                console.log("you win!");
-            } else if (miss == missMax) {
-                console.log("you lose!");
-            }
-            console.log("Misses: " + miss);
-            console.log(match);
-        }
-    </script>
-
-
-
-
-</body>
+          <script src="assets/javascript/game.js"></script>
+        </body>
 
 </html>
