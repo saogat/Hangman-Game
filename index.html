@@ -12,59 +12,53 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="jumbotron">
+                    <h1>Hangman</h1>
+                    <p>Press any key to get started.</p>
+                    <p>Choose a category:</p>
+                    <!-- Single button -->
+                    <select id="mySelect" onchange="chooseCategory()">
+                        <option value="Full-Stack">Full-Stack terms
+                            <option value="GA Cities">GA Cities
+                                <option value="Atlanta Attractions">Atlanta Attractions
+                    </select>
 
-    </head>
+                    <h2>
+                        <span id="picked-word">
+                            <strong></strong>
+                        </span>
+                    </h2>
+                    <h2>
+                        Missed:
+                        <span id="missed-count"> </span>
+                    </h2>
+                    <h2>
+                        Wrong:
+                        <span id="wrong-letters"> </span>
+                    </h2>
+                    <h2>
+                        Guesses remaining:
+                        <span id="remaining"> </span>
+                    </h2>
+                    <h2>
+                        Wins:
+                        <span id="wins"> </span>
+                    </h2>
 
-    <body>
-
-        <body>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-8">
-                        <div class="jumbotron">
-                            <h1>Hangman</h1>
-                            <p>Press any key to get started.</p>
-                            <p>Chose a category:</p>
-                            <!-- Single button -->
-                            <select id="mySelect" onchange="chooseCategory()">
-                                <option value="Full-Stack">Full-Stack terms
-                                    <option value="GA Cities">GA Cities
-                                        <option value="Atlanta Attractions">Atlanta Attractions
-                            </select>
-
-                            <h2>
-                                <span id="picked-word">
-                                    <strong></strong>
-                                </span>
-                            </h2>
-                            <h2>
-                                Missed:
-                                <span id="missed-count"> </span>
-                            </h2>
-                            <h2>
-                                Wrong:
-                                <span id="wrong-letters"> </span>
-                            </h2>
-                            <h2>
-                                Guesses remaining:
-                                <span id="remaining"> </span>
-                            </h2>
-                            <h2>
-                                Wins:
-                                <span id="wins"> </span>
-                            </h2>
-
-                            <h2>
-                                Losses:
-                                <span id="losses"> </span>
-                            </h2>
-                        </div>
-                    </div>
+                    <h2>
+                        Losses:
+                        <span id="losses"> </span>
+                    </h2>
                 </div>
             </div>
+        </div>
+    </div>
 
 
-          <script src="assets/javascript/game.js"></script>
-        </body>
+    <script src="assets/javascript/game.js"></script>
+</body>
 
 </html>
