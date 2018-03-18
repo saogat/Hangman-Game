@@ -27,6 +27,7 @@ var game = {
     showWordArray: [],
     wins: 0,
     losses: 0,
+    sound: document.getElementById("myAudio"),
     randomPick: function () {
         return words[Math.floor(Math.random() * words.length)]
     },
@@ -38,9 +39,11 @@ var game = {
     pickArray: [],
     start: function () {
         this.started = true;
+        this.sound.play();
     },
     stop: function () {
         this.started = false;
+        this.sound.pause();
     },
     incrementMatch: function () {
         this.match++;
