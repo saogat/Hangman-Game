@@ -3,8 +3,6 @@ var words = ["git", "html", "css", "javascript", "jquery", "heroku", "mern", "mo
 
 function chooseCategory() {
     var choice = document.getElementById("mySelect").value;
-    choice == "Full-Stack"
-
     switch (choice) {
         case 'Programming':
             words = ["git", "html", "css", "javascript", "jquery", "heroku", "mern", "mongo"];
@@ -53,8 +51,15 @@ var game = {
     deleteLetter: function (letter) {
         delete this.pickArray[this.pickArray.indexOf(letter)];
     },
-    showWord: function (letter) {
-        this.showWordArray[this.pickArray.indexOf(letter)] = letter;
+    showWord: function (index, letter) {
+        this.showWordArray[index] = letter;
+    },
+    displayTempWord: function () {
+        for (var i = 0; i < this.pickArray.length; i++) {
+            this.showWordArray.push(" _ ");
+            this.tempWord = this.tempWord + " _ ";
+        };
+        this.pickedWord.textContent = this.tempWord;
     },
     displayMissed: function () {
         this.missedCount.textContent = this.miss;
@@ -74,13 +79,15 @@ var game = {
     displayWord: function () {
         var newWord = "";
         this.showWordArray.forEach(function (each) {
-            newWord = newWord.toUpperCase() + " " + each.toUpperCase() + " ";
+            newWord = newWord + " " + each.toUpperCase() + " ";
         });
         this.pickedWord.textContent = newWord;
         return newWord;
     },
     displayRemaining: function () {
         this.remaining.textContent = (this.missMax - this.miss);
+        console.log("miss: " + this.miss);
+        console.log("missMax: " + this.missMax);
     },
     displayResults: function () {
         var word = this.displayWord();
@@ -88,20 +95,16 @@ var game = {
         if (this.match == this.pickArray.length) {
             this.wins++;
             this.displayWins(word);
-            this.started = false;
+            this.stop();
         } else if (this.miss == this.missMax) {
             this.losses++;
             this.displayLosses();
-            this.started = false;
+            this.stop();
         }
     },
-    displayRemaining: function () {
-        this.remaining.textContent = (this.missMax - this.miss);
+    includes: function (index, letter) {
+        return this.pickArray[index] == letter;
     },
-    includes: function (letter) {
-        return this.pickArray.includes(letter);
-    },
-
     init: function () {
         this.start();
         this.match = 0;
@@ -113,39 +116,36 @@ var game = {
         this.pick = this.randomPick();
         this.pickArray = this.pick.toLowerCase().split("");
         this.missMax = this.pick.length + 5;
-        console.log(this.pick);
-
-        for (var i = 0; i < this.pickArray.length; i++) {
-            this.showWordArray.push(" _ ");
-            this.tempWord = this.tempWord + " _ ";
-        }
-
-        this.pickedWord.textContent = this.tempWord;
-        this.remaining.textContent = this.missMax;
+        this.displayTempWord();
+        this.displayRemaining();
     }
 };
 
 document.onkeyup = function (event) {
     if (game.started) {
-        console.log("in game: " + game.pick);
         var guess = event.key.toLowerCase();
-        if (game.includes(guess)) {
-            // good guess
-            game.showWord(guess);
-            game.incrementMatch();
-            game.deleteLetter(guess);
-        } else {
-            // miss
-            game.incrementMiss();
-            game.displayMissed();
-            game.displayGuess(guess);
+        var isMatch = false;
+        console.log(guess);
+        console.log(game.pick);
+        for (var i = 0; i < game.pick.length; i++) {
+            if (game.includes(i, guess)) {
+                // good guess
+                game.showWord(i, guess);
+                game.incrementMatch();
+                isMatch = true;
+            } else {
+                // miss
+                game.displayMissed();
+                game.displayGuess(guess);
+            };
         };
-        game.displayRemaining();
+        if (!isMatch) {
+            game.incrementMiss();
+        };
         game.displayResults();
     } else {
-       
         game.init();
-        console.log("started: " + game.pick);
+        console.log(game.pick);
     };
 
 }
