@@ -1,3 +1,4 @@
+$(document).ready(function() {
 var category;
 var words = ["git", "html", "css", "javascript", "jquery", "heroku", "mern", "mongo"];
 
@@ -152,3 +153,4 @@ document.onkeyup = function (event) {
     };
 
 }
+})
